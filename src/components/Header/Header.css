@@ -1,0 +1,19 @@
+.header-container{
+    position: fixed;
+    height: 4rem;
+    background-color: var(--three-color-text);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-home {
+    display: flex;
+}
+
+.nav-home__list {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5rem;
+}

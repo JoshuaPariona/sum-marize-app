@@ -1,0 +1,85 @@
+.login{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url("https://elpopular.cronosmedia.glr.pe/original/2023/02/12/63e926896f198c295d6ae525.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: grid;
+    place-content: center;
+    overflow: hidden;
+}
+
+.login:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    background-repeat: inherit;
+    background-size: inherit;
+    filter: blur(8px);
+    z-index: 1;
+}
+
+.login-container {
+    background-color: rgba(98, 119, 154, 0.9);;
+    padding: 4.25rem;
+    border-radius: 1.875rem;
+    line-height: 3.75rem;
+    z-index: 2;
+}
+
+.login-logo {
+    text-align: center;
+}
+
+.login-logo img{
+    width: 12.5rem;
+}
+
+.login-title{
+    text-align: center;
+    color: var(--three-color-text);
+}
+
+.form-input{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.form-input label{
+    font-weight: 500;
+    color: var(--three-color-text);
+}
+
+.form-input input {
+    width: 350px;
+    border:none;
+    border-radius: .625rem;
+    padding: .625rem 1.25rem;
+}
+
+.form-input input:focus{
+    border: 0.5px solid #BAC1CC;
+}
+
+.button-submit{
+    margin-top: 40px;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    color: white;
+    background-color: #304767;
+    cursor: pointer;
+    transition: all  0.3s ease-in-out;
+}
+
+.button-submit:hover{
+    background-color: #233046;
+}
