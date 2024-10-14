@@ -1,21 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { getStudents } from '../../../data/Student';
-import Modal from '../../../components/Modales/Modal';
+import React, { useContext, useEffect, useState } from "react";
+import { data } from "../../../data/Student";
+import Modal from "../../../components/Modales/Modal";
+import { StudentDataContext } from "../../../context/StudentData";
+
+/**{
+  "Código Alumno": 238614,
+  "NP": 8,
+  "EV": 8,
+  "NF": 6
+}, */
 
 const ListStudents = () => {
-  const [students, setStudents] = useState([]);
-  const [loader, setLoader] = useState(true);
+  const { studentData } = useContext(StudentDataContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    getStudents()
-      .then((res) => {
-        setStudents(res);
-      })
-      .finally(() => {
-        setLoader(false);
-      });
-  }, []);
+    console.log(studentData);
+  }, [studentData]);
+
+  const fillStudentData = (code, tag) => {
+    if (studentData) {
+      const student = studentData.find(
+        (student) => student["Código Alumno"] === Number(code)
+      );
+      if (student) return student[tag];
+      else {
+        return "SN";
+      }
+    } else {
+      return "SN";
+    }
+  };
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -39,19 +54,30 @@ const ListStudents = () => {
         </tr>
       </thead>
       <tbody>
-        {students.map((student) => (
-          <tr key={student.id}>
-            <td>{student.id}</td>
-            <td>{student.code}</td>
-            <td>{student.paternal}</td>
-            <td>{student.maternal}</td>
-            <td>{student.names}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        ))}
+        {data.map((student) => {
+          const np = fillStudentData(student.code, "NP");
+          const ev = fillStudentData(student.code, "EV");
+          const nf = fillStudentData(student.code, "NF");
+          return (
+            <tr key={student.id}>
+              <td>{student.id}</td>
+              <td>{student.code}</td>
+              <td>{student.paternal}</td>
+              <td>{student.maternal}</td>
+              <td>{student.names}</td>
+              <td>{np}</td>
+              <td>{ev}</td>
+              <td>{nf}</td>
+              <td>
+                {typeof np === "string" ||
+                typeof ev === "string" ||
+                typeof nf === "string"
+                  ? "SN"
+                  :Math.round( np * 0.3 + ev * 0.4 + nf * 0.3)}
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
@@ -60,14 +86,18 @@ const ListStudents = () => {
     <div className="student-container">
       {renderTable()}
       <div className="view-container">
-        <button onClick={openModal} className="view-button">Vista Preliminar</button>
+        <button onClick={openModal} className="view-button">
+          Vista Preliminar
+        </button>
       </div>
       <Modal isOpen={isModalOpen} closeModal={closeModal}>
         <div className="important-container">
           <h2 className="important-title">Importante</h2>
-          <p className="important-paragraph">PORFAVOR VERIFIQUE BIEN LAS CALIFICACIONES ANTES DE GRABAR PARA 
-            CORREGIR HAGA CLICK EN EL BOTON CORREGIR UNA VEZ GRABADA 
-            LA CALIFICACION NO PODRA SER CORREGIDA.</p>
+          <p className="important-paragraph">
+            PORFAVOR VERIFIQUE BIEN LAS CALIFICACIONES ANTES DE GRABAR PARA
+            CORREGIR HAGA CLICK EN EL BOTON CORREGIR UNA VEZ GRABADA LA
+            CALIFICACION NO PODRA SER CORREGIDA.
+          </p>
         </div>
         {renderTable()}
         <div className="modal-buttons">

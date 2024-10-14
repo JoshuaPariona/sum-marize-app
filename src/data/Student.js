@@ -1,4 +1,4 @@
-const data = [{
+export const data = [{
         "id": 1,
         "code": "20230001",
         "paternal": "González",
@@ -199,11 +199,3 @@ const data = [{
         "EF": 18
     }
 ]
-
-export const getStudents = () => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(data);
-        }, 1000);
-    })
-}
