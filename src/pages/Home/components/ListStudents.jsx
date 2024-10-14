@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { getStudents } from '../../../data/Student';
 import Modal from '../../../components/Modales/Modal';
+import ModalAudio from '../../../components/Modales/ModalAudio';
 
 const ListStudents = () => {
   const [students, setStudents] = useState([]);
   const [loader, setLoader] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAudioModalOpen, setIsAudioModalOpen] = useState(false);
 
   useEffect(() => {
     getStudents()
@@ -19,6 +21,10 @@ const ListStudents = () => {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+
+  const openAudioModal = () => setIsAudioModalOpen(true);
+  const closeAudioModal = () => setIsAudioModalOpen(false);
 
   const renderTable = () => (
     <table aria-hidden="true" className="student-table">
@@ -71,11 +77,20 @@ const ListStudents = () => {
         </div>
         {renderTable()}
         <div className="modal-buttons">
-          <button className="modal-button button-green">Escuchar</button>
+          <button onClick={openAudioModal} className="modal-button button-green">Escuchar</button>
           <button className="modal-button button-red">Corregir</button>
           <button className="modal-button button-sky">Grabar</button>
         </div>
       </Modal>
+      <ModalAudio isOpen={isAudioModalOpen} closeModal={closeAudioModal}>
+        <div className="audio-container">
+          <h2>Audio</h2>
+          <audio controls>
+            <source src="path_to_your_audio_file.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </ModalAudio>
     </div>
   );
 };
