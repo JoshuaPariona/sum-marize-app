@@ -37,7 +37,7 @@ const FileUpload = () => {
         setIsModalOpen(false);
       } catch (error) {
         console.log("error");
-        console.log("error", error);
+        console.log(error);
         setIsModalOpen(false);
         setSelectedFile(null);
       }
