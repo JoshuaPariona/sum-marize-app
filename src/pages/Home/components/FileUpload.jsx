@@ -49,6 +49,7 @@ const FileUpload = () => {
 
       {isModalOpen && (
         <div className="modal-overlay">
+          <button onClick={closeModal} className="close-button">&times;</button>
           <div className="modal">
             <h2>Cargando documento...</h2>
             <div className="progress-bar">
@@ -58,7 +59,6 @@ const FileUpload = () => {
               ></div>
             </div>
             <p>{progress}%</p>
-            <button onClick={closeModal} className="close-button">Cerrar</button>
           </div>
         </div>
       )}
