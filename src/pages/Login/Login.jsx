@@ -1,5 +1,8 @@
 import React from "react";
 import "./Login.css";
+import Home from "../Home/Home";
+import  { Link } from "react-router-dom";
+
 
 const Login = () => {
   return (
@@ -22,7 +25,7 @@ const Login = () => {
               <label htmlFor="password">Contraseña:</label>
               <input type="password" placeholder="*********" />
             </div>
-            <button type="submit" className="button-submit">Iniciar sesión</button>
+            <Link to={'./Home'}><button type="submit" className="button-submit">Iniciar sesión</button></Link>
           </form>
         </div>
       </div>
